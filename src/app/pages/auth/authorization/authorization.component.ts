@@ -6,7 +6,6 @@ import {MessageService} from "primeng/api";
 import {UserService} from "../../../services/user/user.service";
 
 
-
 @Component({
   selector: 'app-authorization',
   templateUrl: './authorization.component.html',
@@ -15,16 +14,15 @@ import {UserService} from "../../../services/user/user.service";
 
 export class AuthorizationComponent implements OnInit,OnDestroy,OnChanges {
   @Input() inputProp = 'test';
+  @Input() inputObj: any;
 
-  @Input() inputObj: any
-
-  loginText='Логин';
-  pswText='Пароль';
+  loginText = 'Логин';
+  pswText = 'Пароль';
   psw: string;
   login: string;
-  selectedValue:boolean;
-  cardNumber:string;
-  authTextButton:string;
+  selectedValue: boolean;
+  cardNumber: string;
+  authTextButton: string;
 
   constructor(private authService: AuthService,
               private messageService: MessageService,
@@ -43,16 +41,18 @@ export class AuthorizationComponent implements OnInit,OnDestroy,OnChanges {
   vipStatusSelected():void{
     }
 
-    onAuth(ev: Event): void {
+    onAuth(ev: Event): void {//метод: успешно ли пользователь авторизовался?
     const authUser: IUser = {
       psw: this.psw,
-      login: this.login
+      login: this.login,
+      cardNumber: this.cardNumber
     }
     if (this.authService.checkUser(authUser)){
-      this.router.navigate(['tickets/tickets-list'])
-      this.userService.setUser(authUser) //
-      // **user - передать ваш объект с пользователем
+      this.userService.setUser(authUser);
+      //добавляем уникальный token
+      this.userService.setToken('user-private-token')
 
+      this.router.navigate(['tickets/tickets-list'])
     }
     else {
       this.messageService.add({severity:'error',summary:"Проверьте данные"})

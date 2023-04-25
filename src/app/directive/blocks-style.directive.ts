@@ -50,6 +50,9 @@ constructor( private  el: ElementRef) { }
   }
   ngOnChanges(changes: SimpleChanges) {
   }
+  updateItems(): void {
+    this.items = this.el.nativeElement.querySelectorAll(this.selector);
+  }
 
   initKeyUp (ev: KeyboardEvent): void{
     // как только событие происходит, удаляет границу элемента
@@ -70,10 +73,12 @@ constructor( private  el: ElementRef) { }
         (this.items[this.index] as HTMLElement).setAttribute('style', 'border: 2px solid darkred')
       }
     }
-    this.activeElementIndex = this.index
+    if (this.index >=0 ){
+    this.activeElementIndex = this.index}
   }
 
   initStyle(index: number){
+  this.index = index;
     if (this.items[index]){
       (this.items[index] as HTMLElement).setAttribute('style', 'border: 2px solid darkred')
     }

@@ -1,5 +1,27 @@
-<p-dropdown [options]="menuTypes"
-            [(ngModel)]="selectedMenuType"
-            optionLabel="label">
+<div>
+  <p class="mt-2 ms-2">Тип меню:</p>
+  <p-dropdown class="ms-2" [options]="menuTypes"
+              [(ngModel)]="selectedMenuType"
+              optionLabel="label"
+              (onChange)="changeType($event)">
+  </p-dropdown>
+</div>
+<!--Добавлен новый список-->
+<div class="mt-3 ms-2">
+  <p-dropdown class="mt-3"
+              [options]="tourTypes"
+              optionLabel="label"
+              (onChange)="changeTourType($event)">
+  </p-dropdown>
+</div>
+<div class="mt-3 ms-2">
+  <p-calendar class="" (onSelect)="selectDate($event)" ></p-calendar>
+</div>
+<div class="mt-3 ms-2">
+  <button class="btn-success btn" type="submit"
+             (click)="initRestError()">Ошибка</button>
+</div>
+<div class="mt-3">
+  <button (click)="initSettingsData()" class="btn btn-sm">Обновить настройки</button>
+</div>
 
-</p-dropdown>

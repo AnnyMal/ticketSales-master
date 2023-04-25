@@ -1,11 +1,18 @@
-<div *ngIf="tickets">
-<!-- <p> количество элементов: {{tourWrap.childElementCount}}</p>-->
- <p> активный элемент: {{blockDirective?.activeElementIndex}}</p>
-</div>
+<div>
+  <div *ngIf="isActive">
+ <p class="mx-5"> Количество элементов: {{tickets?.length || 0}}</p>
+ <p class="mx-5 mt-2">Активный элемент: {{blockDirective?.activeElementIndex}}</p>
+  </div>
+
+    <div>
+    <p class="mx-5">
+    Найти тур <input #ticketSearch [(ngModel)]="ticketSearchValue" type="text" pInputText />
+  </p>
+    </div>
 <div appBlockStyle
+     *ngIf="tickets"
      #tourWrap
      #blockDirective='blocksStyle'
-     *ngIf="tickets"
      [selector]="'.ticket-item'"
      [initFirst]="false"
      (renderComplete)="directiveRenderComplete($event)"
@@ -18,4 +25,5 @@
       <img class="w-100" src="/assets/img/{{item.img}}/" alt="">
     </div>
   </div>
+</div>
 </div>

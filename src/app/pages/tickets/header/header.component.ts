@@ -10,36 +10,27 @@ import {IMenuType} from "../../../models/menuType";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  @Input()
-  menuType: IMenuType;
+  @Input() menuType: IMenuType;
   items: MenuItem[];
+
   @Input() test:string='initValue'
   time: Date;
   private timerInterval: number;
-  public user: IUser;
+  public user: IUser | null;
   private settingsActive = true;
 
   constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
-    this.items = [
-      {
-        label: 'Билеты',
-        routerLink: ['tickets-list']
-      },
-      {
-        label: 'Выйти',
-        routerLink: ['/auth']
-      },
-    ];
+    this.items = this.initMenuItems();
 
     this.user = this.userService.getUser();
     this.timerInterval = window.setInterval(() => {
-      console.log('run')
-      this.time = new Date();
-    }, 1000)
-  }
+        this.time = new Date();
+      }, 1000)
+    }
+
 
   ngOnDestroy(): void {
     if (this.timerInterval) {
@@ -63,12 +54,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
       },
       {
         label: 'Настройки',
-        routerLink: ['/settings'],
+        routerLink: ['setting'],
         visible: this.settingsActive
       },
       {
         label: 'Выйти',
-        routerLink: ['/auth']
+        routerLink: ['/auth'],
+        command:() => {
+          this.userService.removeUser()
+        }
       },
 
     ];
