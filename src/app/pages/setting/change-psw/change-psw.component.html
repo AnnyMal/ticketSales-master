@@ -1,0 +1,31 @@
+<div class="d-flex flex-column col-6 m-auto authorization">
+  <div>
+    <span class="mx-3 mt-3">Введите текущий пароль</span>
+    <input type="password"
+           class="mt-2"
+           pInputText
+           [(ngModel)]="currentPsw"
+    />
+  </div>
+  <div>
+    <span class="mx-3 mt-3"> Новый пароль</span>
+    <input type="password"
+           class="mt-2"
+           pInputText
+           [(ngModel)]="newPass"/>
+
+  </div>
+  <div>
+    <span class="mx-3 mt-3">Повторите новый пароль</span>
+    <input type="password"
+           class="mt-2"
+           pInputText
+           [(ngModel)]="newPassRepeat"/>
+
+
+  </div>
+  <div class="mt-5 d-flex justify-content-center">
+    <button (click)="passChangeCheck($event)" type="button" class="btn btn-success">Сменить пароль</button>
+  </div>
+</div>
+
