@@ -9,7 +9,6 @@ import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CarouselModule} from "primeng/carousel";
 
-
 @NgModule({
   declarations: [
     TicketItemComponent

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ObservableExampleService} from "../../services/testing/observable-example.service";
+import {ObservableExampleService} from "../../../services/testing/observable-example.service";
 import {Subject, Subscription, take, takeUntil} from "rxjs";
-import {SettingsService} from "../../services/settings/settings.service";
+import {SettingsService} from "../../../services/settings/settings.service";
 
 
 @Component({

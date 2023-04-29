@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {INearestTour, ITourLocation, ITours} from 'src/app/models/tours';
+import {ICustomTicketData, INearestTour, ITourLocation, ITours} from 'src/app/models/tours';
 import { TicketsStorageService} from "../../../services/tiсkets-storage/tiсkets-storage.service";
 import {IUser} from "../../../models/users";
-import {FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../services/user/user.service";
 import {TicketsService} from "../../../services/tickets/tickets.service";
 import {forkJoin, fromEvent, map, subscribeOn, Subscription} from "rxjs";
@@ -39,12 +39,12 @@ export class TicketItemComponent implements OnInit {
 
     //init formGroup
     this.userForm = new FormGroup({
-      firstName: new FormGroup('', {validators: Validators.required}),
-      lastName: new FormGroup(''),
-      cardNumber: new FormGroup(''),
-      birthDay: new FormGroup(''),
-      age: new FormGroup(''),
-      citizen: new FormGroup('')
+      firstName: new FormControl('', {validators: Validators.required}),
+      lastName: new FormControl(''),
+      cardNumber: new FormControl(''),
+      birthDay: new FormControl(''),
+      age: new FormControl(''),
+      citizen: new FormControl('')
     });
 
     //get nearest tours
@@ -77,7 +77,7 @@ export class TicketItemComponent implements OnInit {
 
   }
   ngAfterViewInit(): void{
-    this.userForm.controls["cardNumber"].setValue(this.user?.cardNumber);
+    this.userForm.controls['cardNumber'].setValue(this.user?.cardNumber);
     //регистрируем событие keyup
     const fromEventObserver = fromEvent(this.ticketSearch.nativeElement,'keyup')
     //подписываемся на событие
@@ -99,6 +99,7 @@ export class TicketItemComponent implements OnInit {
       this.nearestTours = this.ticketService.transformData([data], this.toursLocation)
     })
   }
+
   initTour(): void{
     const userData = this.userForm.getRawValue();
     const postData = {...this.ticket, ...userData};

@@ -14,26 +14,26 @@ function initializeApp (config: ConfigService){
   });
 }
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
-  providers: [
-    ConfigService,
-    //объект с настройками
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeApp,
-      deps: [ConfigService], multi: true
-    },
-    {provide: HTTP_INTERCEPTORS, useClass: RestInterceptorsService, multi: true}
-],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        HttpClientModule
+    ],
+    providers: [
+        ConfigService,
+        //объект с настройками
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initializeApp,
+            deps: [ConfigService], multi: true
+        },
+        {provide: HTTP_INTERCEPTORS, useClass: RestInterceptorsService, multi: true}
+    ],
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }

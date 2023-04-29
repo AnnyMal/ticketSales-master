@@ -25,9 +25,9 @@ export class TicketRestService {
   getRandomNearestEvent(type: number): Observable<INearestTour> {
     switch (type){
       case 0:
-        return this.http.get<INearestTour>('X:\\Angular\\ticketSales-master3\\src\\assets\\mocks\\nearestTours1.json')
+        return this.http.get<INearestTour>('/assets/mocks/a.json')
       case 1:
-        return this.http.get<INearestTour>('X:\\Angular\\ticketSales-master3\\src\\assets\\mocks\\nearestTours2.json')
+        return this.http.get<INearestTour>('/assets/mocks/nearestTours2.json')
       case 2:
         return this.http.get<INearestTour>('/assets/mocks/nearestTours3.json')
       default:
